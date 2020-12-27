@@ -48,6 +48,7 @@
 
 .todo-card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 1em 1em;
@@ -55,6 +56,19 @@
   width: 20em;
   height: 10em;
   background-color: #61dafb;
+  border-radius: 0.3em;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.todo-card button {
+  outline: none;
+  border-radius: 0.6em;
+  transition: cursor 0.5s, background-color 0.5s, box-shadow 0.5s;
+}
+.todo-card button:hover {
+  cursor: pointer;
+  background-color: rgb(43, 104, 226);
+  box-shadow: black;
 }
 
 p {
