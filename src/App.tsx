@@ -47,6 +47,9 @@ function App(): JSX.Element {
         {todos.map((todo: ITodo, index: number) => (
           <section className='todo-card' key={index}>
             <p>{todo.text}</p>
+            <button onClick={() => completeTodo(index)}>
+              {todo.complete ? 'Incomplete' : 'Complete'}
+            </button>
           </section>
         ))}
       </section>
