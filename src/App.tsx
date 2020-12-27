@@ -38,13 +38,11 @@ function App(): JSX.Element {
         <input type='submit' value='Add todo' />
       </form>
       <section className='display-todos'>
-        {todos.map((todo: ITodo, index: number) => {
-          return (
-            <section className='todo-card' key={index}>
-              <p>{todo.text}</p>
-            </section>
-          );
-        })}
+        {todos.map((todo: ITodo, index: number) => (
+          <section className='todo-card' key={index}>
+            <p>{todo.text}</p>
+          </section>
+        ))}
       </section>
     </section>
   );
