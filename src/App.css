@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 .App-logo {
@@ -21,7 +22,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {
@@ -35,4 +36,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.display-todos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1em 0;
+  height: 80vh;
+}
+
+.todo-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 1em;
+  padding: 0 1em;
+  width: 20em;
+  height: 10em;
+  background-color: #61dafb;
+}
+
+p {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: larger;
 }
