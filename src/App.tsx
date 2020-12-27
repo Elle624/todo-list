@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 type FormItem = React.FormEvent<HTMLFormElement>;
+interface ITodo {
+  text: string;
+  complete: boolean;
+}
 
 function App(): JSX.Element {
   const [text, setText] = useState<string>('');
+  const [todos, setTodos] = useState<ITodo[]>([]);
+
   const handleSubmit = (e: FormItem): void => {
     e.preventDefault();
+    addTodo(text);
     setText('');
+  };
+
+  const addTodo = (text: string) => {
+    const newTodos: ITodo[] = [...todos, { text, complete: false }];
+    setTodos(newTodos);
   };
 
   return (
