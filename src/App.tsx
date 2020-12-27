@@ -59,7 +59,7 @@ function App(): JSX.Element {
               <button onClick={() => completeTodo(index)}>
                 {todo.complete ? 'Incomplete' : 'Complete'}
               </button>
-              <button onClick={() => removeTodo(index)}>Remove</button>
+              <button onClick={() => removeTodo(index)}>X</button>
             </section>
           </section>
         ))}
