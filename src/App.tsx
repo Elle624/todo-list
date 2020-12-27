@@ -17,8 +17,14 @@ function App(): JSX.Element {
     setText('');
   };
 
-  const addTodo = (text: string) => {
+  const addTodo = (text: string): void => {
     const newTodos: ITodo[] = [...todos, { text, complete: false }];
+    setTodos(newTodos);
+  };
+
+  const completeTodo = (index: number): void => {
+    const newTodos: ITodo[] = [...todos];
+    newTodos[index].complete = !newTodos[index].complete;
     setTodos(newTodos);
   };
 
