@@ -60,19 +60,25 @@
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.todo-card button {
+.todo-card button,
+input[type='submit'] {
   outline: none;
   border-radius: 0.6em;
-  transition: cursor 0.5s, background-color 0.5s, box-shadow 0.5s;
+  transition: cursor 0.5s, background-color 0.5s, color 0.5s;
 }
-.todo-card button:hover {
+.todo-card button:hover,
+input[type='submit']:hover {
   cursor: pointer;
-  background-color: rgb(43, 104, 226);
-  box-shadow: black;
+  background-color: #000;
+  color: rgb(198, 198, 198);
 }
 
 p {
   font-family: sans-serif;
   font-weight: 600;
   font-size: larger;
+}
+
+input {
+  margin-left: 1em;
 }
