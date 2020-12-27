@@ -55,10 +55,12 @@ function App(): JSX.Element {
             <p style={{ textDecoration: todo.complete ? 'line-through' : '' }}>
               {todo.text}
             </p>
-            <button onClick={() => completeTodo(index)}>
-              {todo.complete ? 'Incomplete' : 'Complete'}
-            </button>
-            <button onClick={() => removeTodo(index)}>Remove</button>
+            <section className='todo-card-nav'>
+              <button onClick={() => completeTodo(index)}>
+                {todo.complete ? 'Incomplete' : 'Complete'}
+              </button>
+              <button onClick={() => removeTodo(index)}>Remove</button>
+            </section>
           </section>
         ))}
       </section>
