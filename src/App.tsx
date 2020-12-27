@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
 type FormItem = React.FormEvent<HTMLFormElement>;
@@ -10,6 +10,7 @@ interface ITodo {
 function App(): JSX.Element {
   const [text, setText] = useState<string>('');
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormItem): void => {
     e.preventDefault();
@@ -20,6 +21,9 @@ function App(): JSX.Element {
   const addTodo = (text: string): void => {
     const newTodos: ITodo[] = [...todos, { text, complete: false }];
     setTodos(newTodos);
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const completeTodo = (index: number): void => {
@@ -46,6 +50,7 @@ function App(): JSX.Element {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder='Things to do'
+          ref={inputRef}
         />
         <input type='submit' value='Add todo' />
       </form>
