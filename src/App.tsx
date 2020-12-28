@@ -34,20 +34,13 @@ function App(): JSX.Element {
     }
   };
 
-  const completeTodo = (index: number): void => {
-    const newTodos: ITodo[] = [...todos];
-    newTodos[index].complete = !newTodos[index].complete;
-    setTodos(newTodos);
+  const updateTodo = (id: string): void => {
+    apiCalls.updateCompleteStatus(id).then(() => getTodoList());
   };
 
   const removeTodo = (id: string): void => {
     apiCalls.removeTodoList(id).then(() => getTodoList());
   };
-  // const removeTodo = (index: number): void => {
-  //   const newTodos: ITodo[] = [...todos];
-  //   newTodos.splice(index, 1);
-  //   setTodos(newTodos);
-  // };
 
   useEffect(() => {
     getTodoList();
@@ -70,13 +63,13 @@ function App(): JSX.Element {
         <input type='submit' value='Add todo' />
       </form>
       <section className='display-todos'>
-        {todos.map((todo: ITodo, index: number) => (
+        {todos.map((todo: ITodo) => (
           <section className='todo-card' key={todo.id}>
             <p style={{ textDecoration: todo.complete ? 'line-through' : '' }}>
               {todo.text}
             </p>
             <section className='todo-card-nav'>
-              <button onClick={() => completeTodo(index)}>
+              <button onClick={() => updateTodo(todo.id)}>
                 {todo.complete ? 'Incomplete' : 'Complete'}
               </button>
               <button onClick={() => removeTodo(todo.id)}>X</button>
