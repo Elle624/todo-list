@@ -1,3 +1,21 @@
+const updateData = (path: string, action: string, id: string) => {
+  return fetch(path, {
+    method: action,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error(
+        'Sorry we are having difficulty processing this request, please try again later!'
+      );
+    }
+  });
+};
+
 export const apiCalls = {
   getTodoList() {
     return fetch('https://todo-list-yl.herokuapp.com/todo-list').then(
@@ -32,20 +50,18 @@ export const apiCalls = {
   },
 
   removeTodoList(id: string) {
-    return fetch('https://todo-list-yl.herokuapp.com/todo-list', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: id }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error(
-          'Sorry we are having difficulty processing this request, please try again later!'
-        );
-      }
-    });
+    return updateData(
+      'https://todo-list-yl.herokuapp.com/todo-list',
+      'DELETE',
+      id
+    );
+  },
+
+  updateCompleteStatus(id: string) {
+    return updateData(
+      `https://todo-list-yl.herokuapp.com/todo-list/${id}`,
+      'PATCH',
+      id
+    );
   },
 };
