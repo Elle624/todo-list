@@ -1,6 +1,7 @@
 ## Todo List (Solo project)
 
 [Deploy site](https://todo-list.elle624.vercel.app/)
+[Link to server repo](https://github.com/Elle624/todo-list-server)
 
 ### Description
 
