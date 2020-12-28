@@ -1,8 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import logo from './logo.svg';
 import './App.css';
+import { apiCalls } from './apiCalls';
+
 type FormItem = React.FormEvent<HTMLFormElement>;
 interface ITodo {
+  id: string;
   text: string;
   complete: boolean;
 }
@@ -19,7 +23,10 @@ function App(): JSX.Element {
   };
 
   const addTodo = (text: string): void => {
-    const newTodos: ITodo[] = [...todos, { text, complete: false }];
+    const newTodos: ITodo[] = [
+      ...todos,
+      { id: nanoid(), text, complete: false },
+    ];
     setTodos(newTodos);
     if (inputRef && inputRef.current) {
       inputRef.current.focus();
@@ -37,6 +44,13 @@ function App(): JSX.Element {
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
+
+  useEffect(() => {
+    apiCalls.getTodoList().then((data) => {
+      const newList: ITodo[] = data.todoList;
+      setTodos(newList);
+    });
+  }, []);
 
   return (
     <section className='App'>
@@ -56,7 +70,7 @@ function App(): JSX.Element {
       </form>
       <section className='display-todos'>
         {todos.map((todo: ITodo, index: number) => (
-          <section className='todo-card' key={index}>
+          <section className='todo-card' key={todo.id}>
             <p style={{ textDecoration: todo.complete ? 'line-through' : '' }}>
               {todo.text}
             </p>
