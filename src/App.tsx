@@ -22,12 +22,13 @@ function App(): JSX.Element {
     setText('');
   };
 
+  const getTodoList = () => {
+    apiCalls.getTodoList().then((data) => setTodos(data.todoList));
+  };
+
   const addTodo = (text: string): void => {
-    const newTodos: ITodo[] = [
-      ...todos,
-      { id: nanoid(), text, complete: false },
-    ];
-    setTodos(newTodos);
+    const newTodo: ITodo = { id: nanoid(), text, complete: false };
+    apiCalls.addTodoList(newTodo).then(() => getTodoList());
     if (inputRef && inputRef.current) {
       inputRef.current.focus();
     }
@@ -39,17 +40,17 @@ function App(): JSX.Element {
     setTodos(newTodos);
   };
 
-  const removeTodo = (index: number): void => {
-    const newTodos: ITodo[] = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const removeTodo = (id: string): void => {
+    apiCalls.removeTodoList(id).then(() => getTodoList());
   };
+  // const removeTodo = (index: number): void => {
+  //   const newTodos: ITodo[] = [...todos];
+  //   newTodos.splice(index, 1);
+  //   setTodos(newTodos);
+  // };
 
   useEffect(() => {
-    apiCalls.getTodoList().then((data) => {
-      const newList: ITodo[] = data.todoList;
-      setTodos(newList);
-    });
+    getTodoList();
   }, []);
 
   return (
@@ -78,7 +79,7 @@ function App(): JSX.Element {
               <button onClick={() => completeTodo(index)}>
                 {todo.complete ? 'Incomplete' : 'Complete'}
               </button>
-              <button onClick={() => removeTodo(index)}>X</button>
+              <button onClick={() => removeTodo(todo.id)}>X</button>
             </section>
           </section>
         ))}
